@@ -1,11 +1,13 @@
 import {Router } from "express";
 import { SmsController } from "../controller/sms";
+import {SmsValidator} from "../validators/sms"
 
 const router  = Router({mergeParams:true})
 const  controller = new SmsController()
+const validator = new SmsValidator()
 
 
-router.route("/").get(controller.getAll).post(controller.create)
+router.route("/").get(controller.getAll).post(validator.create, controller.create)
 router
     .route("/:id")
     .get(controller.get)
